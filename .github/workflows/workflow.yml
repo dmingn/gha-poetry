@@ -24,4 +24,4 @@ jobs:
         run: pip install ./
 
       - name: Assert version matches tag
-        run: test ${ pip show gha-poetry | grep Version | cut -d ' ' -f 2 } == ${{ github.ref_name }}
+        run: test $(pip show gha-poetry | grep Version | cut -d ' ' -f 2) == ${{ github.ref_name }}
