@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  assert-version:
+  bump-version:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -17,21 +17,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4.7.1
-        with:
-          python-version: "3.11"
-
-      - name: Install self
-        run: pip install ./
-
-      - name: Assert version matches tag
-        run: test $(pip show gha-poetry | grep Version | cut -d ' ' -f 2) == ${{ github.ref_name }}
-
-      - name: Delete tag and release
-        if: ${{ failure() }}
-        uses: dev-drprasad/delete-tag-and-release@v1.0.1
-        with:
-          tag_name: ${{ github.ref_name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          delete_release: true
+      - name: Bump version
+        run: sed -i 's/^version = .*$/version = "${{ github.ref_name }}"/g' pyproject.toml
