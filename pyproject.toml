@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gha-poetry"
-version = "0.2.0"
+version = "0"
 description = ""
 authors = ["dmingn <dmingn@users.noreply.github.com>"]
 readme = "README.md"
@@ -8,6 +8,9 @@ packages = [{include = "gha_poetry"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+
+[tool.poetry-version-plugin]
+source = "git-tag"
 
 [build-system]
 requires = ["poetry-core"]
