@@ -15,7 +15,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Bump version
         run: sed -i 's/^version = .*$/version = "${{ github.ref_name }}"/g' pyproject.toml
